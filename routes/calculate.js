@@ -28,6 +28,14 @@ router.post('/', function(req, res) { //recieves form submission
       console.log("Please select a frequency")
   }
     console.log(dailyTotal)
+
+
+    //add to db here
+
+
+
+
+    res.redirect('/expenses')
 })
 
 module.exports = router;
