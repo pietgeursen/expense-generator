@@ -15,3 +15,8 @@ function newUser(name){
 function searchForUser(name){
   return knex('users').where('name', name)
 }
+
+function displayItems(id) {
+  return knex('users')
+    .join('expenses', 'users.id', '=', 'expenses.user_id')
+}
