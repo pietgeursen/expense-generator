@@ -13,6 +13,7 @@
     "hbs": "~4.0.0",
     "knex": "^0.12.6",
     "morgan": "~1.7.0",
+    "nodemon": "^1.11.0",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
