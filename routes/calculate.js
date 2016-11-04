@@ -28,20 +28,32 @@ router.post('/', function(req, res) { //recieves form submission
       console.log("Please select a frequency")
   }
 
-    var userId;
 
-    users.newUser(req.body.userName)
-      .then(function() {
-        return users.searchForUser(req.body.userName)
+    function addAndReturnNewUser(user){
+      return users.newUser(user)
+        .then(function() {
+          return users.searchForUser(user)
+        })
+    }
+
+
+    users.searchForUser(req.body.userName)
+      .then(function(userInfo) {
+        if(userInfo.length === 0) {
+          return addAndReturnNewUser(req.body.userName)
+        } else {
+          return Promise.resolve(userInfo)
+        }
       })
       .then(function(userInfo) {
         console.log("user info: ",userInfo[0])
-        userId = userInfo[0].id
         return expenses.addNewExpense(req.body.itemName, userInfo[0].id, dailyTotal)
+          .then(function() {
+            return Promise.resolve(userInfo)
+          })
       })
-      .then(function(expenses){
-        console.log("expenses", expenses.user_id);
-        res.redirect(`/expenses/${userId}`)
+      .then(function(userInfo){
+        res.redirect(`/expenses/${userInfo[0].id}`)
       })
       .catch(function(err) {
         console.log(err)
