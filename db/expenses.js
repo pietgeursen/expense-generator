@@ -9,9 +9,10 @@ module.exports = {
 }
 
 function addNewExpense(name, user, price){
-  knex('expenses').insert({item: name, user_id: user, pricePerDay: price})
+  console.log(name,user,price);
+  return knex('expenses').insert({item: name, user_id: user, pricePerDay: price})
 }
 
 function deleteExpense(id) {
-  knex('expenses').where('id', id).del()
+  return knex('expenses').where('id', id).del()
 }

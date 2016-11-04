@@ -1,0 +1,21 @@
+<h1>Expenses</h1>
+
+
+<table>
+  <tr>
+    <td>Item</td>
+    <td>Daily</td>
+    <td>Weekly</td>
+    <td>Monthly</td>
+    <td>Yearly</td>
+  </tr>
+  {{#each data}}
+  <tr>
+    <td>{{item}}</td>
+    <td>${{pricePerDay}}</td>
+    <td>${{pricePerWeek}}</td>
+    <td>${{pricePerMonth}} </td>
+    <td>${{pricePerYear}}</td>
+  </tr>
+  {{/each}}
+</table>

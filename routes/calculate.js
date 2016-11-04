@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+var expenses = require('../db/expenses')
+var users = require('../db/users')
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -10,7 +11,6 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) { //recieves form submission
   console.log(req.body);
   var dailyTotal = 0;
-  console.log(typeof req.body.frequency)
   switch(req.body.frequency) {
     case "1":
       dailyTotal = req.body.unitPrice
@@ -27,15 +27,26 @@ router.post('/', function(req, res) { //recieves form submission
     default:
       console.log("Please select a frequency")
   }
-    console.log(dailyTotal)
 
+    var userId;
 
-    //add to db here
+    users.newUser(req.body.userName)
+      .then(function() {
+        return users.searchForUser(req.body.userName)
+      })
+      .then(function(userInfo) {
+        console.log("user info: ",userInfo[0])
+        userId = userInfo[0].id
+        return expenses.addNewExpense(req.body.itemName, userInfo[0].id, dailyTotal)
+      })
+      .then(function(expenses){
+        console.log("expenses", expenses.user_id);
+        res.redirect(`/expenses/${userId}`)
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
 
-
-
-
-    res.redirect('/expenses')
 })
 
 module.exports = router;
