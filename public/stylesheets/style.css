@@ -1,8 +1,60 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  background-image: url(https://a2ua.com/grid/grid-001.jpg);
+  background-size:contain;
+}
+
+h1 {
+  font-family: 'Bitter', serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.radio {
+  margin-left: auto;
+  margin-right: auto;
+  width: 13%;
+  text-align: left;
+}
+
+.submit {
+  font-family: 'Raleway', sans-serif;
+  margin-top: 20px;
+  background-color: white;
+  border: 1.4px solid black;
+  width: 13%;
+  height: 27px;
+}
+
+.submit:hover {
+  background-color: #6ea3f7;
+}
+
+.bodyDiv {
+  background-color: white;
+  width: 77%;
+  margin: auto;
+  padding-top: 15px;
+  padding-bottom: 25px;
+  border: 3px solid black;
+}
+
+table {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  padding: 13px;
+}
+
+.headings {
+  font-family: 'Bitter', serif;
+  font-weight: bolder;
+  text-decoration: underline;
 }
