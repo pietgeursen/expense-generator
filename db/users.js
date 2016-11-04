@@ -5,11 +5,13 @@ var knex = Knex(knexConfig)
 
 module.exports = {
   newUser,
-  searchForUser
+  searchForUser,
+  displayItems
 }
 
 function newUser(name){
-  return knex('users').insert('name', name)
+  console.log("name!",name);
+  return knex('users').insert({'name': name})
 }
 
 function searchForUser(name){
@@ -18,5 +20,5 @@ function searchForUser(name){
 
 function displayItems(id) {
   return knex('users')
-    .join('expenses', 'users.id', '=', 'expenses.user_id')
+    .join('expenses', 'users.id', '=', 'expenses.user_id').where("expenses.user_id",id)
 }
