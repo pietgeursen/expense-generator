@@ -6,7 +6,9 @@ var knex = Knex(knexConfig)
 module.exports = {
   newUser,
   searchForUser,
-  displayItems
+  displayItems,
+  addAndReturnNewUser,
+  findOrCreateUser
 }
 
 function newUser(name){
@@ -21,4 +23,21 @@ function searchForUser(name){
 function displayItems(id) {
   return knex('users')
     .join('expenses', 'users.id', '=', 'expenses.user_id').where("expenses.user_id",id)
+}
+
+function addAndReturnNewUser(userName){
+  return newUser(userName)
+    .then(function() {
+      return searchForUser(userName)
+    })
+}
+
+function findOrCreateUser(userName) {
+  return searchForUser(userName)
+    .then(function(users) {
+      var user = users[0] 
+
+      if(!user) return addAndReturnNewUser(userName)
+      return Promise.resolve(user)
+    })  
 }
